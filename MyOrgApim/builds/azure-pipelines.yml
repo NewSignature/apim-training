@@ -35,6 +35,7 @@ stages:
               repository: xximjasonxx/peopleapi
               tags: |
                 $(Build.BuildId)
+                latest
 
   - stage: deploybackend
     displayName: Deploy
@@ -59,11 +60,6 @@ stages:
               backendAzureRmStorageAccountName: 'storagemytrainingx78s'
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'peopleapi-state'
-
-          - task: Bash@3
-            displayName: Set Environment Variable
-            inputs:
-              script: TAG_NAME=$(Build.BuildId)
 
           - task: TerraformCLI@0
             inputs:
