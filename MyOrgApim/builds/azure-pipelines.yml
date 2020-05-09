@@ -30,8 +30,8 @@ stages:
             displayName: Build and Push to Docker Hub
             inputs:
               command: buildAndPush
-              Dockerfile: $(Build.SourcesDirectory)/MyOrgApim/Dockerfile
-              buildContext: $(Build.SourcesDirectory)/MyOrgApim
+              Dockerfile: $(Build.SourcesDirectory)/MyOrgApim/PeopleApi/Dockerfile
+              buildContext: $(Build.SourcesDirectory)/MyOrgApim/PeopleApi
               repository: xximjasonxx/peopleapi
               tags: |
                 $(Build.BuildId)
