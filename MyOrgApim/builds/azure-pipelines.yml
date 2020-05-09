@@ -61,7 +61,7 @@ stages:
               backendAzureRmKey: 'peopleapi-state'
 
           - script: |
-              'export TAG_NAME=${Build.BuildId}'
+              'export TAG_NAME=$(Build.BuildId)'
             displayName: Set Tag value to Envirobment
 
           - task: TerraformCLI@0
