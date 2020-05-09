@@ -35,3 +35,5 @@ stages:
               repository: xximjasonxx/peopleapi
               tags: |
                 $(Build.BuildId)
+
+          
