@@ -1,5 +1,5 @@
 provider "azurerm" {
-  version = "=2.0.0"
+  version = "=2.1.0"
   features {}
 }
 
@@ -19,6 +19,10 @@ resource "random_string" "random" {
 resource "azurerm_resource_group" "rg" {
     name        = "rg-${var.apim_name}-${random_string.random.result}"
     location    = "East US"
+
+    tags = {
+        projectName = "apim-training"
+    }
 }
 
 # create the APIM instance
@@ -93,4 +97,21 @@ resource "azurerm_api_management_product_policy" "people_product_std_policy" {
     </inbound>
 </policies>
 XML
+}
+
+# create storage for terraform state
+resource "azurerm_storage_account" "storage" {
+    name                        = "storage${replace(var.apim_name, "-", "")}${random_string.random.result}"
+    resource_group_name         = azurerm_resource_group.rg.name
+    location                    = azurerm_resource_group.rg.location
+    account_kind                = "BlobStorage"
+    account_tier                = "Standard"
+    account_replication_type    = "LRS"
+}
+
+# create the container for the remote state
+resource "azurerm_storage_container" "state_container" {
+    name                    = "tfstate"
+    storage_account_name    = azurerm_storage_account.storage.name
+    container_access_type   = "private"
 }

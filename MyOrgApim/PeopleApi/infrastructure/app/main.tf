@@ -5,11 +5,7 @@ provider "azurerm" {
 }
 
 // collect parameters
-variable "resource_group_name" {
-    type    = "string"
-}
-
-variable "appservice_base_name" {
+variable "appservice_name" {
     type    = "string"
 }
 
@@ -21,15 +17,16 @@ resource "random_string" "random" {
 }
 
 // configure data sources
-data "azurerm_resource_group" "rg" {
-    name    = "${var.resource_group_name}"
+resource "azurerm_resource_group" "rg" {
+    name        = "rg-${var.appservice_name}-${random_string.random.result}"
+    location    = "East US"
 }
 
 // specify resources to create
 resource "azurerm_app_service_plan" "plan" {
     name                    = "plan-${var.appservice_base_name}-${random_string.random.result}"
-    resource_group_name     = "${data.azurerm_resource_group.rg.name}"
-    location                = "${data.azurerm_resource_group.rg.location}"
+    resource_group_name     = "${azurerm_resource_group.rg.name}"
+    location                = "${azurerm_resource_group.rg.location}"
     kind                    = "Linux"
     reserved                = true
 
@@ -41,8 +38,8 @@ resource "azurerm_app_service_plan" "plan" {
 
 resource "azurerm_app_service" "app" {
     name                = "app-${var.appservice_base_name}-${random_string.random.result}"
-    resource_group_name = "${data.azurerm_resource_group.rg.name}"
-    location            = "${data.azurerm_resource_group.rg.location}"
+    resource_group_name = "${azurerm_resource_group.rg.name}"
+    location            = "${azurerm_resource_group.rg.location}"
     app_service_plan_id = "${azurerm_app_service_plan.plan.id}"
 
     app_settings = {
