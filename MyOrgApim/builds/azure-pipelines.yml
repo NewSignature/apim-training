@@ -60,9 +60,10 @@ stages:
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'peopleapi-state'
 
-          - script: |
-              'TAG_NAME=$(Build.BuildId)'
-            displayName: Set Tag value to Envirobment
+          - task: Bash@3
+            displayName: Set Environment Variable
+            inputs:
+              script: TAG_NAME=$(Build.BuildId)
 
           - task: TerraformCLI@0
             inputs:
