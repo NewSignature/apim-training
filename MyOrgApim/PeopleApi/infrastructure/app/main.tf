@@ -24,7 +24,7 @@ resource "azurerm_resource_group" "rg" {
 
 // specify resources to create
 resource "azurerm_app_service_plan" "plan" {
-    name                    = "plan-${var.appservice_base_name}-${random_string.random.result}"
+    name                    = "plan-${var.appservice_name}-${random_string.random.result}"
     resource_group_name     = "${azurerm_resource_group.rg.name}"
     location                = "${azurerm_resource_group.rg.location}"
     kind                    = "Linux"
@@ -37,7 +37,7 @@ resource "azurerm_app_service_plan" "plan" {
 }
 
 resource "azurerm_app_service" "app" {
-    name                = "app-${var.appservice_base_name}-${random_string.random.result}"
+    name                = "app-${var.appservice_name}-${random_string.random.result}"
     resource_group_name = "${azurerm_resource_group.rg.name}"
     location            = "${azurerm_resource_group.rg.location}"
     app_service_plan_id = "${azurerm_app_service_plan.plan.id}"
