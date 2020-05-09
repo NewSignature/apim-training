@@ -60,10 +60,9 @@ stages:
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'peopleapi-state'
 
-          - task: CmdLine@2
-            displayName: Set Environment Variable for Tag
-            inputs:
-              script: 'TAG_NAME=${Build.BuildId}'
+          - script: |
+              'TAG_NAME=${Build.BuildId}'
+            displayName: Set Tag value to Envirobment
 
           - task: TerraformCLI@0
             inputs:
@@ -71,3 +70,5 @@ stages:
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure'
               environmentServiceName: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
               commandOptions: '-var "appservice_name=peopleapi"'
+
+          - script: 
