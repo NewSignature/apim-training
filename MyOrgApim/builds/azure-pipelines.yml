@@ -32,7 +32,7 @@ stages:
               command: buildAndPush
               Dockerfile: $(Build.SourcesDirectory)/MyOrgApim/PeopleApi/Dockerfile
               buildContext: $(Build.SourcesDirectory)/MyOrgApim/PeopleApi
-              repository: xximjasonxx/peopleapi
+              repository: xximjasonxx/peopleapi-dev
               tags: |
                 $(Build.BuildId)
                 latest
@@ -57,8 +57,8 @@ stages:
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app'
               backendType: 'azurerm'
               backendServiceArm: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
-              backendAzureRmResourceGroupName: 'rg-my-training-x78s'
-              backendAzureRmStorageAccountName: 'storagemytrainingx78s'
+              backendAzureRmResourceGroupName: 'rg-trainingapp-dev'
+              backendAzureRmStorageAccountName: 'storagetrainingapdevfkh6'
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'peopleapi-state'
 
@@ -68,7 +68,7 @@ stages:
               command: 'apply'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app'
               environmentServiceName: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
-              commandOptions: '-var "appservice_name=peopleapi" -var "build_version=$(Build.BuildId)"'
+              commandOptions: '-var "appservice_name=peopleapi" -var "build_version=$(Build.BuildId)" -var "env_name=dev"'
 
           - script: |
               terraform state pull > terraform.tfstate
@@ -113,8 +113,8 @@ stages:
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/apim'
               backendType: 'azurerm'
               backendServiceArm: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
-              backendAzureRmResourceGroupName: 'rg-my-training-x78s'
-              backendAzureRmStorageAccountName: 'storagemytrainingx78s'
+              backendAzureRmResourceGroupName: 'rg-trainingapp-dev'
+              backendAzureRmStorageAccountName: 'storagetrainingapdevfkh6'
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'peopleapi-apim-state'
 
@@ -124,4 +124,4 @@ stages:
               command: 'apply'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/apim'
               environmentServiceName: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
-              commandOptions: '-var "rg_name=rg-my-training-x78s" -var "apim_name=apim-my-training-x78s" -var "app_service_base_url=$(appServiceUrl)" -var "apim_base_name=my-training"'
+              commandOptions: '-var "rg_name=rg-trainingapp-dev" -var "apim_name=apim-trainingapp-dev" -var "app_service_base_url=$(appServiceUrl)" -var "app_name=trainingapp"'

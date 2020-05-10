@@ -1,13 +1,19 @@
 provider "azurerm" {
-  version = "=2.1.0"
+  version = "=2.8.0"
   features {}
 }
 
-variable "apim_name" {
+variable "app_name" {
   type = string
   description = "Name of your APIM resource, no prefix"
   default = "my-training"
 }
+
+variable "env_name" {
+  description = "Which environment? (dev, prod)"
+  type = string
+}
+
 
 resource "random_string" "random" {
     length = 4
@@ -17,7 +23,7 @@ resource "random_string" "random" {
 
 # create the resource group
 resource "azurerm_resource_group" "rg" {
-    name        = "rg-${var.apim_name}-${random_string.random.result}"
+    name        = "rg-${var.app_name}-${var.env_name}"
     location    = "East US"
 
     tags = {
@@ -27,13 +33,13 @@ resource "azurerm_resource_group" "rg" {
 
 # create the APIM instance
 resource "azurerm_api_management" "apim" {
-    name                = "apim-${var.apim_name}-${random_string.random.result}"
+    name                = "apim-${var.app_name}-${var.env_name}"
     resource_group_name = azurerm_resource_group.rg.name
     location            = azurerm_resource_group.rg.location
     publisher_name      = "Farrellsoft"
     publisher_email     = "admin@farrellsoft.dev"
 
-    sku_name            = "Developer_1"
+    sku_name            = var.env_name == "prod" ? "Standard_1" : "Developer_1"
 }
 
 # define group for product access
@@ -47,7 +53,7 @@ resource "azurerm_api_management_group" "people_group" {
 
 # create Products
 resource "azurerm_api_management_product" "apim_product_std" {
-    product_id              = "${var.apim_name}-people-product-std"
+    product_id              = "${var.app_name}-people-product-std"
     api_management_name     = azurerm_api_management.apim.name
     resource_group_name     = azurerm_resource_group.rg.name
 
@@ -58,7 +64,7 @@ resource "azurerm_api_management_product" "apim_product_std" {
 }
 
 resource "azurerm_api_management_product" "apim_product_unl" {
-    product_id              = "${var.apim_name}-people-product-unl"
+    product_id              = "${var.app_name}-people-product-unl"
     api_management_name     = azurerm_api_management.apim.name
     resource_group_name     = azurerm_resource_group.rg.name
 
@@ -101,7 +107,7 @@ XML
 
 # create storage for terraform state
 resource "azurerm_storage_account" "storage" {
-    name                        = "storage${replace(var.apim_name, "-", "")}${random_string.random.result}"
+    name                        = "${substr("storage${var.app_name}", 0, 17)}${var.env_name}${random_string.random.result}"
     resource_group_name         = azurerm_resource_group.rg.name
     location                    = azurerm_resource_group.rg.location
     account_kind                = "BlobStorage"

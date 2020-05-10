@@ -8,7 +8,7 @@ services:
     restart: always
 
   webapp:
-    image: xximjasonxx/peopleapi:latest
+    image: xximjasonxx/peopleapi-dev:latest
     #build:
     #  context: ../
     container_name: people-api
