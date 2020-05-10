@@ -71,8 +71,8 @@ stages:
               commandOptions: '-var "appservice_name=peopleapi" -var "build_version=$(Build.BuildId)"'
 
           - script: |
-              terraform state pull
-              cat file.json
+              terraform state pull > terraform.tfstate
+              terraform output -json
             workingDirectory: $(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app
         
       - job: checkupdate
