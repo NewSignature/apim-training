@@ -11,9 +11,6 @@ trigger:
     include:
       - master
 
-variables:
-  appservice_url: ''
-
 stages:
   - stage: buildstage
     displayName: Build
@@ -41,7 +38,7 @@ stages:
                 latest
 
   - stage: deploybackend
-    displayName: Deploy
+    displayName: Deploy API
     jobs:
       - job: deployappservice
         displayName: Deploy App Service
@@ -74,16 +71,22 @@ stages:
               commandOptions: '-var "appservice_name=peopleapi" -var "build_version=$(Build.BuildId)"'
               outputVariable: $(appservice_url)
 
-  - stage: updateapim
-    displayName: APIM Update
-    jobs:
+          - script: |
+              echo "##vso[task.setvariable variable=appServiceUrl]$(appservice_url)"
+            name: appServiceUrlSetTask
+            displayName: Process TF Apply Output
+        
       - job: checkupdate
         displayName: Wait for Backend
+        dependsOn: [ "deployappservice" ]
+        variables:
+          - name: appServiceUrl
+            value: $[ dependencies.deployappservice.outputs['appServiceUrlSetTask.appServiceUrl'] ]
         pool:
           vmImage: 'ubuntu-latest'
         steps:
           - script: |
-              docker run xximjasonxx/versionchecker:v2 https://app-peopleapi-3s4a.azurewebsites.net/ping $(Build.BuildId) 10
+              docker run xximjasonxx/versionchecker:v2 $(appServiceUrl)/ping $(Build.BuildId) 10
             displayName: Check for New Version
 
       - job: updateapi
