@@ -137,6 +137,14 @@ stages:
               environmentServiceName: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
               commandOptions: '-var "rg_name=rg-trainingapp-dev" -var "apim_name=apim-trainingapp-dev" -var "app_service_base_url=$(appServiceUrl)" -var "app_name=trainingapp"'
 
+          - script: |
+              terraform state pull > terraform.tfstate
+              PeopleApiId=$(terraform output -json | jq '.people_api_id.value' -r)
+              echo "##vso[task.setvariable variable=peopleApiId;isOutput=true]$PeopleApiId"
+            workingDirectory: $(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app
+            name: tfApplyVars
+            displayName: Process TF Outputs
+
           - task: AzureCLI@2
             inputs:
               azureSubscription: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
@@ -144,7 +152,7 @@ stages:
               scriptLocation: 'inlineScript'
               inlineScript: |
                 $ApiMgmtContext = New-AzureRmApiManagementContext -ResourceGroupName "rg-trainingapp-dev" -ServiceName "apim-trainingapp-dev"
-                Import-AzureRmApiManagementApi -Context $ApiMgmtContext -SpecificationFormat "Swagger" -SpecificationUrl "${var.app_service_base_url}/swagger/v1/swagger.json" -Path "people" -ApiId "<id>"
+                Import-AzureRmApiManagementApi -Context $ApiMgmtContext -SpecificationFormat "Swagger" -SpecificationUrl "${var.app_service_base_url}/swagger/v1/swagger.json" -Path "people" -ApiId "${tfApplyVars.peopleApiId}"
 
   - stage: deploybackendprod
     displayName: Deploy Prod
