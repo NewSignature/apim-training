@@ -151,8 +151,8 @@ stages:
           vmImage: 'windows-2019'
         dependsOn: [ "updateapi", "deployappservice" ]
         variables:
-          - name: personApiId
-            value: $[ dependencies.updateapi.outputs['tfApplyVars.personApiId'] ]
+          - name: peopleApiId
+            value: $[ dependencies.updateapi.outputs['tfApplyVars.peopleApiId'] ]
           - name: appServiceUrl
             value: $[ dependencies.deployappservice.outputs['tfApplyVars.appServiceUrl'] ]
         steps:
@@ -163,8 +163,9 @@ stages:
               scriptType: inlineScript
               azurePowerShellVersion: LatestVersion
               inline: |
-                Write-Host "$env:APPSERVICEURL"
-                Write-Host "$env:PERSONAPIID"
+                Write-Host "Print variables"
+                Write-Host "$($env:APPSERVICEURL)/swagger/v1/swagger.json"
+                Write-Host "$env:PEOPLEAPIID"
 
           - task: AzurePowerShell@4
             displayName: Import API
@@ -175,7 +176,7 @@ stages:
               inline: |
                 Enable-AzureRmAlias
                 $context = New-AzureRmApiManagementContext -ResourceGroupName "rg-trainingapp-dev" -ServiceName "apim-trainingapp-dev"
-                Import-AzureRmApiManagementApi -Context $context -SpecificationFormat "Swagger" -SpecificationUrl "$env:APPSERVICEURL/swagger/v1/swagger.json" -Path "people" -ApiId "$env:PERSONAPIID"
+                Import-AzureRmApiManagementApi -Context $context -SpecificationFormat "Swagger" -SpecificationUrl "$($env:APPSERVICEURL)/swagger/v1/swagger.json" -Path "people" -ApiId "$env:PEOPLEAPIID"
 
   - stage: deploybackendprod
     displayName: Deploy Prod
