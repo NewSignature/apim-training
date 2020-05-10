@@ -48,7 +48,7 @@ stages:
           - task: TerraformInstaller@0
             displayName: Install Terraform
             inputs:
-              terraformVersion: '0.12.3'
+              terraformVersion: '0.12.24'
 
           - task: TerraformCLI@0
             displayName: Init Terraform (App)
@@ -72,15 +72,19 @@ stages:
 
           - script: |
               terraform state pull > terraform.tfstate
-              terraform output -json
+              AppServiceUrl=$(terraform output -json | jq '.appservice_url.value' -r)
+              echo $AppServiceUrl
+              echo "##vso[task.setvariable variable=appServiceUrl; isOutput=true]$AppServiceUrl"
             workingDirectory: $(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app
+            name: tfApplyVars
+            displayName: Process TF Outputs
         
       - job: checkupdate
         displayName: Wait for Backend
         dependsOn: [ "deployappservice" ]
         variables:
           - name: appServiceUrl
-            value: $[ dependencies.deployappservice.outputs['appServiceUrlSetTask.appServiceUrl'] ]
+            value: $[ dependencies.deployappservice.outputs['tfApplyCars.appServiceUrl'] ]
         pool:
           vmImage: 'ubuntu-latest'
         steps:
