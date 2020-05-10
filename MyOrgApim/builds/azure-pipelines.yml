@@ -167,6 +167,7 @@ stages:
               inline: |
                 Enable-AzureRmAlias
                 $context = New-AzureRmApiManagementContext -ResourceGroupName "rg-trainingapp-dev" -ServiceName "apim-trainingapp-dev"
+                Import-AzureRmApiManagementApi -Context $context -SpecificationFormat "Swagger" -SpecificationUrl "${appServiceUrl}/swagger/v1/swagger.json" -Path "people" -ApiId "${personApiId}"
 
   - stage: deploybackendprod
     displayName: Deploy Prod
