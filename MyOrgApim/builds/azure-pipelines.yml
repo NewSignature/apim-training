@@ -119,7 +119,7 @@ stages:
               backendAzureRmKey: 'peopleapi-apim-state'
 
           - task: TerraformCLI@0
-            displayName: Apply Terraform (app)
+            displayName: Apply Terraform (api)
             inputs:
               command: 'apply'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/apim'

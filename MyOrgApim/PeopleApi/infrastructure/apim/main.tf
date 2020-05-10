@@ -33,8 +33,8 @@ data "azurerm_api_management_product" "apim_product_std" {
 
 data "azurerm_api_management_product" "apim_product_unl" {
     product_id              = "${var.apim_name}-people-product-unl"
-    api_management_name     = var.apim.name
-    resource_group_name     = var.rg.name
+    api_management_name     = var.apim_name
+    resource_group_name     = var.rg_name
 }
 
 # get the resource that is our target API
