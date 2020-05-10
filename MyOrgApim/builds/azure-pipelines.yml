@@ -69,3 +69,23 @@ stages:
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app'
               environmentServiceName: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
               commandOptions: '-var "appservice_name=peopleapi" -var "build_version=$(Build.BuildId)"'
+
+  - stage: updateapim
+    displayName: APIM Update
+    jobs:
+      - job: checkupdate
+        displayName: Wait for Backend
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - script: |
+              docker run xximjasonxx/versionchecker:v2 https://app-peopleapi-3s4a.azurewebsites.net/ping $(Build.BuildId) 10
+
+      - job: updateapi
+        displayName: Update APIM API
+        dependsOn: [ "checkupdate" ]
+        pool:
+          vmImage: 'ubuntu-latest'
+        steps:
+          - script: |
+              echo 'I will start now'
