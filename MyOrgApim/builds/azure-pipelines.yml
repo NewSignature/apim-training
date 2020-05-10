@@ -48,19 +48,19 @@ stages:
           - task: TerraformInstaller@0
             displayName: Install Terraform
             inputs:
-              terraformVersion: '0.12.3'
+              terraformVersion: '0.12.4'
 
-          - task: TerraformCLI@0
-            displayName: Init Terraform (App)
+          - task: terraforminit@0
+            displayName: Init Terraform
             inputs:
-              command: 'init'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app'
-              backendType: 'azurerm'
-              backendServiceArm: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
-              backendAzureRmResourceGroupName: 'rg-my-training-x78s'
-              backendAzureRmStorageAccountName: 'storagemytrainingx78s'
-              backendAzureRmContainerName: 'tfstate'
-              backendAzureRmKey: 'peopleapi-state'
+              cwd: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app'
+              useazurerm: true
+              azureSubscription: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
+              initbackend: true
+              backendrg: 'rg-my-training-x78s'
+              backendstorage: 'storagemytrainingx78s'
+              backendcontainer: 'tfstate'
+              backendKey: 'peopleapi-state'
 
           - task: TerraformCLI@0
             displayName: Apply Terraform (app)
@@ -70,11 +70,20 @@ stages:
               environmentServiceName: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
               commandOptions: '-var "appservice_name=peopleapi" -var "build_version=$(Build.BuildId)"'
 
+          - task: terraformoutput@0
+            displayName: Process Output
+            name: tfApply
+            inputs:
+              cwd: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app'
+              useazurerm: true
+              azureSubscription: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
+              outputvars: |
+                {
+                "appservice_url": "appServiceUrl"
+                }
+
           - script: |
-              ls -l
-              terraform output -json > file.json
-              cat file.json
-            workingDirectory: $(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app
+              echo $(appServiceUrl)
         
       - job: checkupdate
         displayName: Wait for Backend
