@@ -1,6 +1,6 @@
 
 provider "azurerm" {
-  version = "=2.1.0"
+  version = "=2.8.0"
   features {}
 }
 
@@ -53,8 +53,8 @@ resource "azurerm_api_management_api" "apim_people_api" {
   protocols           = [ "https" ]
   service_url         = var.app_service_base_url
 
-  #import {
-  #  content_format    = "openapi-link"
-  #  content_value     = "${var.app_service_base_url}/swagger/v1/swagger.json"
-  #}
+  import {
+    content_format    = "openapi-link"
+    content_value     = "${var.app_service_base_url}/swagger/v1/swagger.json"
+  }
 }
