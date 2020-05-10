@@ -38,7 +38,6 @@ resource "random_string" "random" {
 // configure data sources
 data "azurerm_resource_group" "rg" {
     name        = "rg-${var.rg_name}"
-    location    = "East US"
 }
 
 // specify resources to create
