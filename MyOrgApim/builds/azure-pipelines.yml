@@ -157,17 +157,6 @@ stages:
             value: $[ dependencies.deployappservice.outputs['tfApplyVars.appServiceUrl'] ]
         steps:
           - task: AzurePowerShell@4
-            displayName: Import API w
-            inputs:
-              azureSubscription: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
-              scriptType: inlineScript
-              azurePowerShellVersion: LatestVersion
-              inline: |
-                Write-Host "Print variables"
-                Write-Host "$($env:APPSERVICEURL)/swagger/v1/swagger.json"
-                Write-Host "$env:PEOPLEAPIID"
-
-          - task: AzurePowerShell@4
             displayName: Import API
             inputs:
               azureSubscription: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
@@ -176,7 +165,7 @@ stages:
               inline: |
                 Enable-AzureRmAlias
                 $context = New-AzureRmApiManagementContext -ResourceGroupName "rg-trainingapp-dev" -ServiceName "apim-trainingapp-dev"
-                Import-AzureRmApiManagementApi -Context $context -SpecificationFormat "Swagger" -SpecificationUrl "$($env:APPSERVICEURL)/swagger/v1/swagger.json" -Path "people" -ApiId "$env:PEOPLEAPIID"
+                Import-AzureRmApiManagementApi -Context $context -SpecificationFormat "Swagger" -SpecificationUrl "$($env:APPSERVICEURL)/swagger/v1/swagger.json" -Path "people" -ApiId "people-api"
 
   - stage: deploybackendprod
     displayName: Deploy Prod
