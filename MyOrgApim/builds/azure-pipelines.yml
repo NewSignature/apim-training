@@ -151,6 +151,7 @@ stages:
               scriptType: 'pscore'
               scriptLocation: 'inlineScript'
               inlineScript: |
+                Install-Module -Name AzureRM.ApiManagement -Force
                 $ApiMgmtContext = New-AzureRmApiManagementContext -ResourceGroupName "rg-trainingapp-dev" -ServiceName "apim-trainingapp-dev"
                 Import-AzureRmApiManagementApi -Context $ApiMgmtContext -SpecificationFormat "Swagger" -SpecificationUrl "${var.app_service_base_url}/swagger/v1/swagger.json" -Path "people" -ApiId "${tfApplyVars.peopleApiId}"
 
