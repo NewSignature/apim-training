@@ -78,13 +78,16 @@ stages:
             workingDirectory: $(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app
             name: tfApplyVars
             displayName: Process TF Outputs
+
+          - script: |
+              echo $(tfApplyVars.appServiceUrl)
         
       - job: checkupdate
         displayName: Wait for Backend
         dependsOn: [ "deployappservice" ]
         variables:
           - name: appServiceUrl
-            value: $[ dependencies.deployappservice.outputs['tfApplyCars.appServiceUrl'] ]
+            value: $[ dependencies.deployappservice.outputs['tfApplyVars.appServiceUrl'] ]
         pool:
           vmImage: 'ubuntu-latest'
         steps:
