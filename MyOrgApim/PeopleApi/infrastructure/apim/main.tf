@@ -56,11 +56,6 @@ resource "azurerm_api_management_api" "apim_people_api" {
   path                = "people"
   protocols           = [ "https" ]
   service_url         = var.app_service_base_url
-
-  import {
-    content_format    = "openapi-link"
-    content_value     = "${var.app_service_base_url}/swagger/v1/swagger.json"
-  }
 }
 
 # add the api to our products
