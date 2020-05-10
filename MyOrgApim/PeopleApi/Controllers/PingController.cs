@@ -17,7 +17,7 @@ namespace PeopleApi.Controllers
         [HttpGet]
         public IActionResult Ping()
         {
-            return Ok(_configuration["API_VERSION"]);
+            return Ok(_configuration["API_VERSION"] ?? "No Version");
         }
     }
 }
