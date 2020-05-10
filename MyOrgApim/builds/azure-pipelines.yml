@@ -71,8 +71,10 @@ stages:
               commandOptions: '-var "appservice_name=peopleapi" -var "build_version=$(Build.BuildId)"'
 
           - script: |
-              terraform output -state=$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app -json > file.json
+              ls -l
+              terraform output -json > file.json
               cat file.json
+            workingDirectory: $(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app
         
       - job: checkupdate
         displayName: Wait for Backend
