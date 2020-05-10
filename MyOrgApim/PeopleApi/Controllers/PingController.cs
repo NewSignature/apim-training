@@ -16,7 +16,7 @@ namespace PeopleApi.Controllers
         }
 
         /// <summary>
-        /// Returns the current API version as a health check
+        /// Ping
         /// </summary>
         /// <response code="200">Successfully responded</response>
         [HttpGet]

@@ -24,7 +24,7 @@ namespace PersonApi
         }
 
         /// <summary>
-        /// Get all People stored in datastore
+        /// Get all People
         /// </summary>
         /// <response code="200">Successfully returned a list of all persons in the data store</response>
         [HttpGet]
@@ -35,7 +35,7 @@ namespace PersonApi
         }
 
         /// <summary>
-        /// Get a single stored person by their Id from the datastore
+        /// Get a Person
         /// </summary>
         /// <response code="200">The person was found and returned successfully</response>
         /// <response code="404">The person could not be found in the datastore</response>
@@ -52,7 +52,7 @@ namespace PersonApi
         }
 
         /// <summary>
-        /// Create a new Person in the datastore
+        /// Create a new Person
         /// </summary>
         /// <response code="201">The person was successfully created</response>
         [HttpPost]
@@ -64,7 +64,7 @@ namespace PersonApi
         }
 
         /// <summary>
-        /// Update an existing Person in the datastore
+        /// Update an existing Person
         /// </summary>
         /// <response code="204">The Person was updated</response>
         /// <response code="404">The person to update was not found in the datastore</response>
@@ -85,7 +85,7 @@ namespace PersonApi
         }
 
         /// <summary>
-        /// Delete a Person from the datastore
+        /// Delete a Person
         /// </summary>
         /// <response code="204">Delete Operation completed</response>
         [HttpDelete("{id}")]
