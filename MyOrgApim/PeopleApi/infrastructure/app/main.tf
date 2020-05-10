@@ -1,7 +1,13 @@
 
 provider "azurerm" {
-  version = "=2.0.0"
+  version = "=2.1.0"
   features {}
+}
+
+terraform {
+    backend "azurerm" {
+        # filled in by azure devops runner
+    }
 }
 
 // collect parameters
