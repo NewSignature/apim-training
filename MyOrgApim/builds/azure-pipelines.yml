@@ -89,7 +89,7 @@ stages:
           vmImage: 'ubuntu-latest'
         steps:
           - script: |
-              docker run xximjasonxx/versionchecker:v2 $(appServiceUrl)/ping $(Build.BuildId) 10
+              docker run xximjasonxx/versionchecker:v3 $(appServiceUrl)/ping $(Build.BuildId) 20
             displayName: Check for New Version
 
       - job: updateapi
