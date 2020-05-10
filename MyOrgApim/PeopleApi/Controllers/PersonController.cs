@@ -28,7 +28,7 @@ namespace PersonApi
         /// </summary>
         /// <response code="200">Successfully returned a list of all persons in the data store</response>
         [HttpGet]
-        [ProducesResponseType(typeof(IList<PersonResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(PersonsResponse), StatusCodes.Status200OK)]
         public async Task<IActionResult> Get()
         {
             return Ok((await _personService.GetPeople()).Select(x => x.AsPersonResponse()));

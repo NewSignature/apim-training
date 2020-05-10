@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using PeopleApi.Entities;
 
@@ -17,5 +18,10 @@ namespace PeopleApi.Models
         public int Age { get; set; }
         public string FavoriteColor { get; set; }
         public string Id { get; set; }
+    }
+
+    public class PersonsResponse
+    {
+        public IList<PersonResponse> Items { get; set; }
     }
 }
