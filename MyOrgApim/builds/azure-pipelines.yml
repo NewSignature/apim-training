@@ -86,7 +86,8 @@ stages:
         displayName: Wait for Backend
         dependsOn: [ "deployappservice" ]
         variables:
-          appServiceUrl: $[ dependencies.deployappservice.outputs['tfApplyVars.appServiceUrl'] ]
+          - name: appServiceUrl
+            value: $[ dependencies.deployappservice.outputs['tfApplyVars.appServiceUrl'] ]
         pool:
           vmImage: 'ubuntu-latest'
         steps:
