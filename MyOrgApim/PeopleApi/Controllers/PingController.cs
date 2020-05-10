@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace PeopleApi.Controllers
 {
@@ -6,10 +7,17 @@ namespace PeopleApi.Controllers
     [Route("ping")]
     public class PingController : ControllerBase
     {
+        private readonly IConfiguration _configuration;
+
+        public PingController(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+
         [HttpGet]
         public IActionResult Ping()
         {
-            return Ok("I am working");
+            return Ok(_configuration["API_VERSION"]);
         }
     }
 }

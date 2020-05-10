@@ -6,7 +6,11 @@ provider "azurerm" {
 
 // collect parameters
 variable "appservice_name" {
-    type    = "string"
+    type    = string
+}
+
+variable "build_version" {
+  type      = string
 }
 
 // specify extras
@@ -43,7 +47,8 @@ resource "azurerm_app_service" "app" {
     app_service_plan_id = "${azurerm_app_service_plan.plan.id}"
 
     app_settings = {
-        "WEBSITES_ENABLE_APP_SERVICE_STORAGE" = "false"
+        WEBSITES_ENABLE_APP_SERVICE_STORAGE = false
+        API_VERSION = var.build_version
     }
 
     site_config {

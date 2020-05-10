@@ -68,4 +68,4 @@ stages:
               command: 'apply'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app'
               environmentServiceName: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
-              commandOptions: '-var "appservice_name=peopleapi"'
+              commandOptions: '-var "appservice_name=peopleapi" -var "build_version=${Build.BuildId)"'
