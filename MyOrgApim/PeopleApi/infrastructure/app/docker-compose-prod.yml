@@ -1,0 +1,18 @@
+version: '3.3'
+
+services:
+  redis:
+    image: redis
+    ports:
+      - 6379:6379
+    restart: always
+
+  webapp:
+    image: xximjasonxx/peopleapi-prod:latest
+    #build:
+    #  context: ../
+    container_name: people-api
+    ports:
+      - 8000:80
+    environment:
+      REDIS_HOSTNAME: 'redis'

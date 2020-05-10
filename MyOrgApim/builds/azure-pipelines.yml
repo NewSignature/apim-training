@@ -37,6 +37,17 @@ stages:
                 $(Build.BuildId)
                 latest
 
+          - task: Docker@2
+            displayName: Build and Push to Docker Hub
+            inputs:
+              command: buildAndPush
+              Dockerfile: $(Build.SourcesDirectory)/MyOrgApim/PeopleApi/Dockerfile
+              buildContext: $(Build.SourcesDirectory)/MyOrgApim/PeopleApi
+              repository: xximjasonxx/peopleapi-prod
+              tags: |
+                $(Build.BuildId)
+                latest
+
   - stage: deploybackenddev
     displayName: Deploy Dev
     jobs:
