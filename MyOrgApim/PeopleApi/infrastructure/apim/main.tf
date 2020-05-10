@@ -15,7 +15,6 @@ variable "rg_name" {
   type = string
 }
 
-
 variable "apim_name" {
   type = string
 }
@@ -62,4 +61,19 @@ resource "azurerm_api_management_api" "apim_people_api" {
     content_format    = "openapi-link"
     content_value     = "${var.app_service_base_url}/swagger/v1/swagger.json"
   }
+}
+
+# add the api to our products
+resource "azurerm_api_management_product_api" "product-std-api" {
+  api_name            = azurerm_api_management_api.apim_people_api.name
+  product_id          = data.azurerm_api_management_product.apim_product_std.product_id
+  resource_group_name = data.azurerm_resource_group.rg.name
+  api_management_name = var.apim_name
+}
+
+resource "azurerm_api_management_product_api" "product-unl-api" {
+  api_name            = azurerm_api_management_api.apim_people_api.name
+  product_id          = data.azurerm_api_management_product.apim_product_unl.product_id
+  resource_group_name = data.azurerm_resource_group.rg.name
+  api_management_name = var.apim_name
 }
