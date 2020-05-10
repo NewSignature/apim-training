@@ -148,7 +148,7 @@ stages:
       - job: importapidev
         displayName: Import API
         pool:
-          vmImage: 'windows-latest'
+          vmImage: 'windows-2019'
         dependsOn: [ "updateapi" ]
         variables:
           - name: personApiId
