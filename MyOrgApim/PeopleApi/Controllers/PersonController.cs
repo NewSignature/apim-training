@@ -51,7 +51,7 @@ namespace PersonApi
             return Ok(person.AsPersonResponse());
         }
 
-        /*/// <summary>
+        /// <summary>
         /// Get people by prefix
         /// </summary>
         /// <responseCode code="200">List of person with matching first initial</responseCode>
@@ -61,7 +61,7 @@ namespace PersonApi
         {
             var result = await _personService.GetPeopleByPrefix(prefix);
             return Ok(result.Select(x => x.AsPersonResponse()));
-        }*/
+        }
 
         /// <summary>
         /// Create a new Person
