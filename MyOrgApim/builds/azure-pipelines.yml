@@ -161,6 +161,7 @@ stages:
             inputs:
               azureSubscription: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
               scriptType: inlineScript
+              azurePowerShellVersion: LatestVersion
               inline: |
                 Install-Module -Name AzureRM.ApiManagement -Force
                 $ApiMgmtContext = New-AzureRmApiManagementContext -ResourceGroupName "rg-trainingapp-dev" -ServiceName "apim-trainingapp-dev"
