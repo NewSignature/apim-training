@@ -37,7 +37,7 @@ resource "random_string" "random" {
 
 // configure data sources
 data "azurerm_resource_group" "rg" {
-    name        = "rg-${var.rg_name}"
+    name        = var.rg_name
 }
 
 // specify resources to create
