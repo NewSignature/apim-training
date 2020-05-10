@@ -163,6 +163,7 @@ stages:
               scriptType: inlineScript
               azurePowerShellVersion: LatestVersion
               inline: |
+                Install-Module -Name AzureRM.ApiManagement -Force
                 $context = New-AzureRmApiManagementContext -ResourceGroupName "rg-trainingapp-dev" -ServiceName "apim-trainingapp-dev"
 
   - stage: deploybackendprod
