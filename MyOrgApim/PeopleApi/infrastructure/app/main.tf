@@ -62,3 +62,7 @@ resource "azurerm_app_service" "app" {
         always_on               = "true"
     }
 }
+
+output "appservice_url" {
+  value = "https://${azurerm_app_service.app.default_site_hostname}"
+}

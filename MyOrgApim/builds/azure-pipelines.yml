@@ -11,6 +11,9 @@ trigger:
     include:
       - master
 
+variables:
+  appservice_url: ''
+
 stages:
   - stage: buildstage
     displayName: Build
@@ -80,6 +83,7 @@ stages:
         steps:
           - script: |
               docker run xximjasonxx/versionchecker:v2 https://app-peopleapi-3s4a.azurewebsites.net/ping $(Build.BuildId) 10
+            displayName: Check for New Version
 
       - job: updateapi
         displayName: Update APIM API
