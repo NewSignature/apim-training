@@ -149,12 +149,12 @@ stages:
         displayName: Import API
         pool:
           vmImage: 'windows-latest'
-          dependsOn: [ "deployappservice", "updateapi", "checkupdate" ]
-          variables:
-            - name: personApiId
-              value: $[ dependencies.updateapi.outputs['tfApplyVars.personApiId'] ]
-            - name: appServiceUrl
-              value: $[ dependencies.deployappservice.outputs['tfApplyVars.appServiceUrl'] ]
+        dependsOn: [ "updateapi" ]
+        variables:
+          - name: personApiId
+            value: $[ dependencies.updateapi.outputs['tfApplyVars.personApiId'] ]
+          - name: appServiceUrl
+            value: $[ dependencies.deployappservice.outputs['tfApplyVars.appServiceUrl'] ]
         steps:
           - task: AzurePowerShell@4
             displayName: Import API
@@ -163,9 +163,7 @@ stages:
               scriptType: inlineScript
               azurePowerShellVersion: LatestVersion
               inline: |
-                Install-Module -Name AzureRM.ApiManagement -Force
-                $ApiMgmtContext = New-AzureRmApiManagementContext -ResourceGroupName "rg-trainingapp-dev" -ServiceName "apim-trainingapp-dev"
-                Import-AzureRmApiManagementApi -Context $ApiMgmtContext -SpecificationFormat "Swagger" -SpecificationUrl "${appServiceUrl}/swagger/v1/swagger.json" -Path "people" -ApiId "${personApiId}"
+                $context = New-AzureRmApiManagementContext -ResourceGroupName "rg-trainingapp-dev" -ServiceName "apim-trainingapp-dev"
 
   - stage: deploybackendprod
     displayName: Deploy Prod
