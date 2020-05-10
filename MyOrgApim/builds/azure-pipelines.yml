@@ -124,4 +124,4 @@ stages:
               command: 'apply'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/apim'
               environmentServiceName: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
-              commandOptions: '-var "rg_name=rg-my-training-x78s" -var "apim_name=apim-my-training-x78s" -var "app_service_base_url=$(appServiceUrl)"'
+              commandOptions: '-var "rg_name=rg-my-training-x78s" -var "apim_name=apim-my-training-x78s" -var "app_service_base_url=$(appServiceUrl)" -var "apim_base_name=my-training"'
