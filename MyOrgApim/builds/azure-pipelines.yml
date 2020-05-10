@@ -72,7 +72,7 @@ stages:
               outputVariable: $(appservice_url)
 
           - script: |
-              echo "##vso[task.setvariable variable=appServiceUrl]$(appservice_url)"
+              echo "##vso[task.setvariable variable=appServiceUrl; isOutput=true]$(appservice_url.value)"
             name: appServiceUrlSetTask
             displayName: Process TF Apply Output
         
