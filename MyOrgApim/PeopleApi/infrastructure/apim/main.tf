@@ -54,7 +54,7 @@ resource "azurerm_api_management_api" "apim_people_api" {
   service_url         = var.app_service_base_url
 
   import {
-    content_format    = "swagger-link-json"
+    content_format    = "openapi-link"
     content_value     = "${var.app_service_base_url}/swagger/v1/swagger.json"
   }
 }
