@@ -149,7 +149,7 @@ stages:
         displayName: Import API
         pool:
           vmImage: 'windows-latest'
-          dependsOn: [ "deployappservice", "updateapi" ]
+          dependsOn: [ "deployappservice", "updateapi", "checkupdate" ]
           variables:
             - name: personApiId
               value: $[ dependencies.updateapi.outputs['tfApplyVars.personApiId'] ]
