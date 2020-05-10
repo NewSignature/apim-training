@@ -107,7 +107,7 @@ stages:
               terraformVersion: '0.12.24'
 
           - task: TerraformCLI@0
-            displayName: Init Terraform (Api)
+            displayName: Init Terraform (api)
             inputs:
               command: 'init'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/apim'
