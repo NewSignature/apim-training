@@ -72,6 +72,12 @@ namespace PeopleApi.Services
             );
         }
 
+        public async Task<IList<Person>> GetPeopleByPrefix(string prefix)
+        {
+            var people = await GetPeople();
+            return people.Where(x => x.FirstName.StartsWith(prefix)).ToList();
+        }
+
         async Task<IList<Person>> GetRedisPeopleAsync()
         {
             var redis = ConnectionMultiplexer.Connect(_configuration["REDIS_HOSTNAME"]);

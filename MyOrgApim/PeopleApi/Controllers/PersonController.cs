@@ -52,6 +52,18 @@ namespace PersonApi
         }
 
         /// <summary>
+        /// Get people by prefix
+        /// </summary>
+        /// <responseCode code="200">List of person with matching first initial</responseCode>
+        [HttpGet("byFirstLetter/{prefix}")]
+        [ProducesResponseType(typeof(PersonsResponse), StatusCodes.Status200OK)]
+        public async Task<IActionResult> GetByPrefix(string prefix)
+        {
+            var result = await _personService.GetPeopleByPrefix(prefix);
+            return Ok(result.Select(x => x.AsPersonResponse()));
+        }
+
+        /// <summary>
         /// Create a new Person
         /// </summary>
         /// <response code="201">The person was successfully created</response>
