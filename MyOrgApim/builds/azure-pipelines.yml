@@ -163,7 +163,7 @@ stages:
               scriptType: inlineScript
               azurePowerShellVersion: LatestVersion
               inline: |
-                Write-Host "$env:APPSERVICEURL
+                Write-Host "$env:APPSERVICEURL"
                 Write-Host "$env:PERSONAPIID"
 
           - task: AzurePowerShell@4
