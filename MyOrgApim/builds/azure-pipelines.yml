@@ -141,7 +141,7 @@ stages:
               terraform state pull > terraform.tfstate
               PeopleApiId=$(terraform output -json | jq '.people_api_id.value' -r)
               echo "##vso[task.setvariable variable=peopleApiId;isOutput=true]$PeopleApiId"
-            workingDirectory: $(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app
+            workingDirectory: $(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/apim
             name: tfApplyVars
             displayName: Process TF Outputs
 
