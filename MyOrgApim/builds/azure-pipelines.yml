@@ -155,6 +155,8 @@ stages:
             value: $[ dependencies.updateapi.outputs['tfApplyVars.personApiId'] ]
           - name: appServiceUrl
             value: $[ dependencies.deployappservice.outputs['tfApplyVars.appServiceUrl'] ]
+          - name: system.debug
+            value: true
         steps:
           - task: AzurePowerShell@4
             displayName: Import API
