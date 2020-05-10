@@ -107,7 +107,7 @@ XML
 
 # create storage for terraform state
 resource "azurerm_storage_account" "storage" {
-    name                        = "${substr("storage${var.app_name}", 0, 17)}${var.env_name}${random_string.random.result}"
+    name                        = "${substr("storage${var.app_name}", 0, 16)}${var.env_name}${random_string.random.result}"
     resource_group_name         = azurerm_resource_group.rg.name
     location                    = azurerm_resource_group.rg.location
     account_kind                = "BlobStorage"
