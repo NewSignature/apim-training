@@ -74,7 +74,7 @@ stages:
               terraform state pull > terraform.tfstate
               AppServiceUrl=$(terraform output -json | jq '.appservice_url.value' -r)
               echo $AppServiceUrl
-              echo "##vso[task.setvariable variable=appServiceUrl; isOutput=true]$AppServiceUrl"
+              echo "##vso[task.setvariable variable=appServiceUrl;isOutput=true]$AppServiceUrl"
             workingDirectory: $(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app
             name: tfApplyVars
             displayName: Process TF Outputs
