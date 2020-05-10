@@ -77,3 +77,7 @@ resource "azurerm_api_management_product_api" "product-unl-api" {
   resource_group_name = data.azurerm_resource_group.rg.name
   api_management_name = var.apim_name
 }
+
+output "people_api_id" {
+  value = azurerm_api_management_api.apim_people_api.id
+}
