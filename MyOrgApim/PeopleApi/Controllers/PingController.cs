@@ -23,7 +23,7 @@ namespace PeopleApi.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         public IActionResult Ping()
         {
-            return Ok(_configuration["API_VERSION"] ?? "No Version");
+            return Ok(_configuration["API_VERSION"] ?? "No Version For You");
         }
     }
 }

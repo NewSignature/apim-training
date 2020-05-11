@@ -41,7 +41,7 @@ resource "azurerm_app_service" "app" {
     location            = "${azurerm_resource_group.rg.location}"
     app_service_plan_id = "${azurerm_app_service_plan.plan.id}"
     site_config {
-        linux_fx_version        = "DOCKER|xximjasonxx/weatherapi-basic:v2"
+        linux_fx_version        = "DOCKER|xximjasonxx/weatherapi-basic:v2.1"
         always_on               = "true"
     }
 }

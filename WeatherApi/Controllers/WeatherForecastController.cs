@@ -28,6 +28,7 @@ namespace WeatherApi.Controllers
         /// <summary>
         /// Get all Forecasts
         /// </summary>
+        /// <remarks>Call this with Authorization</remarks>
         /// <responseCode code="200">Return all forecasts</responseCode>
         [HttpGet]
         [ProducesResponseType(typeof(IEnumerable<WeatherForecast>), StatusCodes.Status200OK)]

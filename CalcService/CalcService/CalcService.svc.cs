@@ -34,7 +34,7 @@ namespace CalcService
 
 		public int Subtract(NumberRequest subtractRequest)
 		{
-			return subtractRequest.NumberTwo = subtractRequest.NumberTwo;
+			return subtractRequest.NumberTwo - subtractRequest.NumberTwo;
 		}
 	}
 }
