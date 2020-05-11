@@ -13,6 +13,7 @@ namespace NewSig.Examples
     public static class Functions
     {
         [FunctionName("SayHelloEnglish")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public static async Task<IActionResult> SayHelloEnglish(
             [HttpTrigger(AuthorizationLevel.Function, "post", Route = "english/hello")] HttpRequest req,
             ILogger log)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -9,6 +10,7 @@ namespace WeatherApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Produces("application/json")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -23,7 +25,12 @@ namespace WeatherApi.Controllers
             _logger = logger;
         }
 
+        /// <summary>
+        /// Get all Forecasts
+        /// </summary>
+        /// <responseCode code="200">Return all forecasts</responseCode>
         [HttpGet]
+        [ProducesResponseType(typeof(IEnumerable<WeatherForecast>), StatusCodes.Status200OK)]
         public IEnumerable<WeatherForecast> Get()
         {
             var rng = new Random();

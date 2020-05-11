@@ -62,33 +62,20 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CalcService.svc" />
-    <None Include="Connected Services\MyCalcService\configuration91.svcinfo" />
-    <None Include="Connected Services\MyCalcService\configuration.svcinfo" />
-    <None Include="Connected Services\MyCalcService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CalcService.svc.cs">
       <DependentUpon>CalcService.svc</DependentUpon>
     </Compile>
-    <Compile Include="Connected Services\MyCalcService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="ICalcService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Properties\PublishProfiles\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Connected Services\MyCalcService\CalcService.wsdl" />
-    <None Include="Properties\PublishProfiles\CalcService123 - Web Deploy.pubxml" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -98,9 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Connected Services\MyCalcService\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
