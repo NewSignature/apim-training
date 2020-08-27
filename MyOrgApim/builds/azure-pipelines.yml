@@ -79,7 +79,7 @@ stages:
               command: 'apply'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app'
               environmentServiceName: 'RgSegTrainingConnection'
-              commandOptions: '-var "appservice_name=peopleapi" -var "build_version=$(Build.BuildId)" -var "env_name=dev" -var "rg_name=rg-segtraining2"'
+              commandOptions: '-var "appservice_name=peopleapi" -var "build_version=$(Build.BuildId)"'
 
           - script: |
               terraform state pull > terraform.tfstate

@@ -40,8 +40,8 @@ resource "azurerm_app_service_plan" "plan" {
     reserved                = true
 
     sku {
-        tier = var.env_name == "prod" ? "Standard" : "Basic"
-        size = var.env_name == "prod" ? "S1" : "B1"
+        tier = "Basic"
+        size = "B1"
     }
 }
 
