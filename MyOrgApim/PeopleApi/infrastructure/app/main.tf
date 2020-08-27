@@ -28,7 +28,7 @@ resource "random_string" "random" {
 
 // configure data sources
 data "azurerm_resource_group" "rg" {
-    name        = "rg-segtraining2"
+    name        = "rg-segtraining"
 }
 
 // specify resources to create
