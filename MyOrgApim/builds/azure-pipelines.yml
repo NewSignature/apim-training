@@ -123,7 +123,7 @@ stages:
               command: 'init'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/apim'
               backendType: 'azurerm'
-              backendServiceArm: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
+              backendServiceArm: 'RgSegTrainingConnection'
               backendAzureRmResourceGroupName: 'rg-segtraining2'
               backendAzureRmStorageAccountName: 'storageaccountrgseg8983'
               backendAzureRmContainerName: 'tfstate'
@@ -134,5 +134,5 @@ stages:
             inputs:
               command: 'apply'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/apim'
-              environmentServiceName: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
+              environmentServiceName: 'RgSegTrainingConnection'
               commandOptions: '-var "rg_name=rg-segtraining2" -var "apim_name=mytestapim12345" -var "app_service_base_url=$(appServiceUrl)" -var "app_name=trainingapp"'
