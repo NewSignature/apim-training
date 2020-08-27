@@ -25,5 +25,16 @@ namespace PeopleApi.Controllers
         {
             return Ok(_configuration["API_VERSION"] ?? "No Version For You");
         }
+
+        /// <summary>
+        /// Be nice and say hello
+        /// </summary>
+        /// <response code="200">Successfully said Hello</response>
+        [HttpGet("{name}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public IActionResult GetHello(string name)
+        {
+            return Ok($"Hello {name}");
+        }
     }
 }
