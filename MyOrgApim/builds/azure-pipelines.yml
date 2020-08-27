@@ -124,8 +124,8 @@ stages:
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/apim'
               backendType: 'azurerm'
               backendServiceArm: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
-              backendAzureRmResourceGroupName: 'rg-trainingapp-dev'
-              backendAzureRmStorageAccountName: 'storagetrainingadevzzj6'
+              backendAzureRmResourceGroupName: 'rg-segtraining2'
+              backendAzureRmStorageAccountName: 'storageaccountrgseg8983'
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'peopleapi-apim-state'
 
@@ -135,4 +135,4 @@ stages:
               command: 'apply'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/apim'
               environmentServiceName: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
-              commandOptions: '-var "rg_name=rg-trainingapp-dev" -var "apim_name=apim-trainingapp-dev" -var "app_service_base_url=$(appServiceUrl)" -var "app_name=trainingapp"'
+              commandOptions: '-var "rg_name=rg-segtraining2" -var "apim_name=mytestapim12345" -var "app_service_base_url=$(appServiceUrl)" -var "app_name=trainingapp"'
