@@ -135,4 +135,4 @@ stages:
               command: 'apply'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/apim'
               environmentServiceName: 'RgSegTrainingConnection'
-              commandOptions: '-var "rg_name=rg-segtraining2" -var "apim_name=mytestapim12345" -var "app_service_base_url=$(appServiceUrl)" -var "app_name=trainingapp"'
+              commandOptions: '-var "rg_name=rg-segtraining" -var "apim_name=apim-jfsegtraining" -var "app_service_base_url=$(appServiceUrl)" -var "app_name=trainingapp"'
