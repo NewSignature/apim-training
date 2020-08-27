@@ -69,7 +69,7 @@ stages:
               backendType: 'azurerm'
               backendServiceArm: 'RgSegTrainingConnection'
               backendAzureRmResourceGroupName: 'rg-segtraining2'
-              backendAzureRmStorageAccountName: 'storageaccountrgseg8983'
+              backendAzureRmStorageAccountName: 'stgsegtrainingimages'
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'peopleapi-state'
 
@@ -125,7 +125,7 @@ stages:
               backendType: 'azurerm'
               backendServiceArm: 'RgSegTrainingConnection'
               backendAzureRmResourceGroupName: 'rg-segtraining2'
-              backendAzureRmStorageAccountName: 'storageaccountrgseg8983'
+              backendAzureRmStorageAccountName: 'stgsegtrainingimages'
               backendAzureRmContainerName: 'tfstate'
               backendAzureRmKey: 'peopleapi-apim-state'
 
