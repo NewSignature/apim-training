@@ -67,7 +67,7 @@ stages:
               command: 'init'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app'
               backendType: 'azurerm'
-              backendServiceArm: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
+              backendServiceArm: 'RgSegTrainingConnection'
               backendAzureRmResourceGroupName: 'rg-segtraining2'
               backendAzureRmStorageAccountName: 'storageaccountrgseg8983'
               backendAzureRmContainerName: 'tfstate'
@@ -78,7 +78,7 @@ stages:
             inputs:
               command: 'apply'
               workingDirectory: '$(System.DefaultWorkingDirectory)/MyOrgApim/PeopleApi/infrastructure/app'
-              environmentServiceName: 'Visual Studio Professional with MSDN(aa5e6005-924a-495b-ab54-f2e5bc28b9e7)'
+              environmentServiceName: 'RgSegTrainingConnection'
               commandOptions: '-var "appservice_name=peopleapi" -var "build_version=$(Build.BuildId)" -var "env_name=dev" -var "rg_name=rg-segtraining2"'
 
           - script: |
